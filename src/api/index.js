@@ -9,13 +9,13 @@ import axios from 'axios';
 // import router from '../router';
 
 const instance = axios.create({
-  baseURL: 'http://192.168.10.164:3000/',
+  baseURL: `${window.location.protocol}//${window.location.host}/api/`,
   withCredentials: true,
   params: {},
   timeout: 25000, // 请求超时时间
 });
 
-instance.interceptors.request.use(request => {
+instance.interceptors.request.use((request) => {
   const axiosRequest = {
     ...request,
     params: {
@@ -27,7 +27,7 @@ instance.interceptors.request.use(request => {
 });
 
 instance.interceptors.response.use(
-  response => {
+  (response) => {
     const code = Number(response.data.respCode);
     if (code !== 0 && !isNaN(code)) {
       // Message({
@@ -43,7 +43,7 @@ instance.interceptors.response.use(
     }
     return response;
   },
-  error => {
+  (error) => {
     // let message = error.message;
     // console.log(error);
     // if (error.code === 'ECONNABORTED' && error.message.indexOf('timeout') !== -1) {
@@ -54,6 +54,6 @@ instance.interceptors.response.use(
     //   type: 'error',
     // });
     return Promise.reject(error);
-  }
+  },
 );
 export default instance;

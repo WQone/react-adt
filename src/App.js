@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import './App.css';
 import 'antd/dist/antd.css';
-import RouterDiv from './router';
+import Layouts from './views/Layout';
+import mockInit from '../src/api/mock';
+mockInit();
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <RouterDiv />
+        <Layouts />
       </div>
     );
   }
